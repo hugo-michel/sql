@@ -46,6 +46,10 @@ VALUES
 -- - student : Toto (id 1)
 -- - tag : SASS (id inconnu)
 -- Note : c'est à vous de retrouver l'id du tag mais vous pouvez l'inscrire en dur dans la requête.
+INSERT INTO student_tag
+(student_id, tag_id)
+VALUES
+(1, 11);
 
 -- Exo 2.4
 -- Mettez à jour le tag `HTML` :
@@ -66,19 +70,30 @@ WHERE id = 10;
 -- Supprimez la relation entre un student et un tag :
 -- - student : Zacharie Evrard
 -- - tag : Terminal Bash
+DELETE
+FROM student_tag
+WHERE (student_id = 100) AND (tag_id = 10);
 
 -- Exo 2.7
 -- Supprimez la relation entre un student et un project :
 -- - student : Arthur Lacombe
 -- - project : Dicta quia at qui
+UPDATE student
+SET project_id = NULL
+WHERE id = 16;
 
 -- Exo 2.8
 -- Supprimez toutes les relations entre un student et ses tags :
 -- - student : Odette Thomas
+DELETE
+FROM student_tag
+WHERE student_id = 99;
 
 -- Exo 2.9
 -- Supprimez un student :
 -- - student : Odette Thomas
+DELETE FROM student
+WHERE id = 99;
 
 -- Exo 2.10
 -- Supprimez un project et toutes les relations avec ses dépendances, c-à-d les relations avec des student et les relations avec des tags :
@@ -87,3 +102,15 @@ WHERE id = 10;
 -- Note : vous devez supprimez les relations avec les dépendances mais pas les dépendances.
 -- Autrement dit ne supprimez aucun student ni aucun tag.
 
+-- suppression relation project - tag
+DELETE from project_tag
+WHERE project_id = 16;
+
+-- suppression relation project - student
+UPDATE student
+SET project_id = NULL
+WHERE project_id = 16;
+
+-- suppression du projet 16
+DELETE FROM project
+WHERE id=16;
